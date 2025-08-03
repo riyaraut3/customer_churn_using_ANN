@@ -1,63 +1,71 @@
-# Binary Classification using Artificial Neural Network (ANN)
+# Customer Churn Prediction using Artificial Neural Network (ANN)
 
-This project builds and evaluates a binary classification model using a feedforward Artificial Neural Network (ANN) in TensorFlow/Keras.
+This project builds and evaluates a binary classification model using a feedforward Artificial Neural Network (ANN) in TensorFlow/Keras. The task is to predict whether a bank customer will churn based on historical data.
 
 ---
 
-## 📂 Dataset
+## 📂 Dataset: Churn_Modelling.csv
 
-The dataset used consists of structured tabular data with **13 numerical features** per sample. It is suitable for binary classification (label: 0 or 1).  
-Common use cases for such data include **medical diagnostics**, **credit scoring**, or **churn prediction**, although the exact context can vary.
+The dataset used is `Churn_Modelling.csv`, which contains customer data from a bank. Each row represents a customer, and the goal is to predict whether they have exited (churned) or not.
 
-- 📌 Target variable: Binary (0/1)
-- 📌 Total features: 13
-- 📌 Data format: Preprocessed and scaled numeric values
+### 🔢 Key Features:
+
+- `CreditScore`: Numerical credit score of the customer  
+- `Geography`: Country of the customer (e.g., France, Germany, Spain)  
+- `Gender`: Male or Female  
+- `Age`: Customer's age  
+- `Tenure`: Number of years with the bank  
+- `Balance`: Account balance  
+- `NumOfProducts`: Number of bank products used  
+- `HasCrCard`: Has a credit card (0 or 1)  
+- `IsActiveMember`: Active bank member (0 or 1)  
+- `EstimatedSalary`: Estimated salary  
+- `Exited`: **Target variable** (1 = churned, 0 = stayed)
+
+### 🧹 Preprocessing:
+
+- Converted categorical variables using OneHotEncoding / LabelEncoding  
+- Scaled numerical features using StandardScaler  
+- Split data into training and test sets
 
 ---
 
 ## ⚙️ What I Did
 
-- Built an ANN for binary classification.
-- Trained the model using a labeled dataset.
-- Visualized training & validation metrics (accuracy and loss).
-- Wrote a reusable evaluation function to compute:
-  - Accuracy
-  - Precision
-  - Recall
-  - F1-Score
-  - ROC AUC Score
-  - Confusion Matrix with heatmap
+- Built an ANN for binary classification using customer data  
+- Trained the model using the Keras Sequential API  
+- Visualized training and validation accuracy/loss  
+- Created an evaluation function to report model performance
 
 ---
 
 ## 🔬 How I Did It
 
-### 🔧 Model Architecture
+### 🧠 Model Architecture
 
-- **Input Layer**: 13 features  
-- **Hidden Layer 1**: Dense(7), activation='relu'  
-- **Hidden Layer 2**: Dense(6), activation='relu'  
-- **Output Layer**: Dense(1), activation='sigmoid'  
+- Input Layer: 11 features after preprocessing  
+- Hidden Layer 1: Dense(7), activation='relu'  
+- Hidden Layer 2: Dense(6), activation='relu'  
+- Output Layer: Dense(1), activation='sigmoid'
 
-### 🧠 Training Configuration
+### ⚙️ Training Details
 
 - Optimizer: `adam`  
 - Loss Function: `binary_crossentropy`  
 - Metrics: `accuracy`
 
-### 🧪 Evaluation Code
-
-Created a function `evaluate_binary_model(model, X_test, y_test)` to:
-
-- Predict class labels from the model
-- Calculate core metrics
-- Plot confusion matrix using Seaborn
-
 ---
 
-## 📊 Training & Evaluation Workflow
+## 📊 Evaluation
 
-1. **Train the Model**
+Created a custom function `evaluate_binary_model()` to compute:
 
-```python
-model.fit(X_train, y_train, epochs=..., batch_size=..., validation_data=(X_val, y_val))
+- Accuracy
+- Precision
+- Recall
+- F1-Score
+- ROC AUC Score
+- Confusion Matrix (with heatmap)
+
+
+
